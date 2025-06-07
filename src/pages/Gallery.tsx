@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
+
+const Gallery = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const categories = [
+    {
+      name: "Wedding Cakes",
+      images: [
+        "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg",
+        "https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg",
+        "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg",
+        "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg"
+      ]
+    },
+    {
+      name: "Birthday Cakes",
+      images: [
+        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
+        "https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg",
+        "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg",
+        "https://images.pexels.com/photos/140831/pexels-photo-140831.jpeg"
+      ]
+    },
+    {
+      name: "Event Decorations",
+      images: [
+        "https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg",
+        "https://images.pexels.com/photos/1729931/pexels-photo-1729931.jpeg",
+        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
+        "https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg"
+      ]
+    },
+    {
+      name: "Finger Foods",
+      images: [
+        "https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg",
+        "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg",
+        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+        "https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg"
+      ]
+    },
+    {
+      name: "Spices & Seasonings",
+      images: [
+        "https://images.pexels.com/photos/1340130/pexels-photo-1340130.jpeg",
+        "https://images.pexels.com/photos/1340116/pexels-photo-1340116.jpeg",
+        "https://images.pexels.com/photos/1340105/pexels-photo-1340105.jpeg",
+        "https://images.pexels.com/photos/1340130/pexels-photo-1340130.jpeg"
+      ]
+    },
+    {
+      name: "Gift Packages",
+      images: [
+        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
+        "https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg",
+        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
+        "https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg"
+      ]
+    }
+  ];
+
+  return (
+    <div className="animate-fade-in">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-cream-white to-blush-pink/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-grandeur-brown mb-6">
+            Our Gallery
+          </h1>
+          <p className="text-xl font-poppins text-grandeur-brown/80 max-w-3xl mx-auto">
+            Explore our portfolio of beautiful creations, from elegant wedding cakes to stunning event decorations and delicious finger foods.
+          </p>
+        </div>
+      </section>
+
+      {/* Gallery Sections */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {categories.map((category, categoryIndex) => (
+            <div key={categoryIndex} className="mb-16">
+              <h2 className="text-3xl font-playfair font-bold text-grandeur-brown mb-8 text-center">
+                {category.name}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {category.images.map((image, imageIndex) => (
+                  <div
+                    key={imageIndex}
+                    className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
+                    onClick={() => setSelectedImage(image)}
+                  >
+                    <img
+                      src={image}
+                      alt={`${category.name} ${imageIndex + 1}`}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <p className="font-poppins font-medium">View Larger</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Modal for full-size images */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl max-h-full">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-12 right-0 text-white hover:text-gold-accent transition-colors duration-200"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Gallery image"
+              className="max-w-full max-h-full object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Custom Work CTA */}
+      <section className="py-20 bg-gradient-to-r from-gold-accent to-grandeur-brown text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-6">
+            Love What You See?
+          </h2>
+          <p className="text-xl font-poppins mb-8 max-w-2xl mx-auto">
+            Let us create something beautiful and unique for your special event. Every piece is custom-made with love and attention to detail.
+          </p>
+          <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+            <a
+              href="/order"
+              className="inline-flex items-center bg-white text-grandeur-brown px-8 py-4 rounded-full font-poppins font-semibold hover:bg-cream-white transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Order Custom Work
+            </a>
+            <a
+              href="/contact"
+              className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-full font-poppins font-semibold hover:bg-white hover:text-grandeur-brown transition-all duration-300 transform hover:scale-105"
+            >
+              Discuss Your Vision
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Gallery;
