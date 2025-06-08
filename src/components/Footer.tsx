@@ -13,17 +13,45 @@ const Footer = () => {
             <p className="text-sm font-poppins text-cream-white/80">
               Creating memorable moments with luxury cakes, gifts, and event services.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gold-accent hover:text-blush-pink transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gold-accent hover:text-blush-pink transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gold-accent hover:text-blush-pink transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
+           <div className="flex space-x-4">
+  <a
+    href="https://www.instagram.com/grandeurevents89"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gold-accent hover:text-blush-pink transition-colors"
+  >
+    <Instagram className="h-5 w-5" />
+  </a>
+  <a
+    href="https://www.tiktok.com/@grandeurevents89"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gold-accent hover:text-blush-pink transition-colors"
+  >
+    <svg
+      className="h-5 w-5"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12.3 2h3.2a5.3 5.3 0 0 0 5.3 5.3v3.1a8.5 8.5 0 0 1-5.3-1.8v7.2a5.6 5.6 0 1 1-5.6-5.6c.5 0 1 .1 1.5.3v3.1a2.4 2.4 0 1 0 2.4 2.4V2z" />
+    </svg>
+  </a>
+  <a
+    href="https://x.com/grandeurev26712"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gold-accent hover:text-blush-pink transition-colors"
+  >
+    <svg
+      className="h-5 w-5"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d="M20.1 3H16l-3.3 4.2L9 3H4l6.6 9L4 21h4.1l3.5-4.5L15 21h5l-6.8-9L20.1 3z" />
+    </svg>
+  </a>
+</div>
+
           </div>
 
           {/* Quick Links */}
@@ -77,7 +105,7 @@ const Footer = () => {
 
         <div className="border-t border-cream-white/20 mt-8 pt-8 text-center">
           <p className="font-poppins text-sm text-cream-white/80">
-            © 2024 Grandeur Cakes and Gifts. All rights reserved.
+            © 2025 Grandeur Cakes and Gifts. All rights reserved.
           </p>
         </div>
       </div>
