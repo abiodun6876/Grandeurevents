@@ -97,57 +97,60 @@ Please confirm availability and provide payment details. Thank you!`;
                 
                 <div className="space-y-6">
                   {state.items.map((item) => (
-                    <div key={item.id} className="flex items-center space-x-4 p-4 border border-blush-pink/20 rounded-xl">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-20 h-20 object-cover rounded-lg"
-                      />
-                      
-                      <div className="flex-1">
-                        <h3 className="font-playfair font-semibold text-grandeur-brown text-lg">
-                          {item.name}
-                        </h3>
-                        <p className="font-poppins text-gold-accent text-sm">
-                          {item.category}
-                        </p>
-                        <p className="font-playfair font-bold text-gold-accent text-xl">
-                          ₦{item.price.toLocaleString()}
-                        </p>
-                      </div>
-                      
-                      <div className="flex items-center space-x-3">
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
-                        >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        
-                        <span className="font-poppins font-semibold text-grandeur-brown w-8 text-center">
-                          {item.quantity}
-                        </span>
-                        
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-                      </div>
-                      
-                      <div className="text-right">
-                        <p className="font-playfair font-bold text-grandeur-brown text-lg">
-                          ₦{(item.price * item.quantity).toLocaleString()}
-                        </p>
-                        <button
-                          onClick={() => removeItem(item.id)}
-                          className="text-red-500 hover:text-red-700 transition-colors duration-200 mt-2"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
+                    <div
+  key={item.id}
+  className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 p-4 border border-blush-pink/20 rounded-xl"
+>
+  <img
+    src={item.image}
+    alt={item.name}
+    className="w-20 h-20 object-cover rounded-lg self-center"
+  />
+
+  <div className="flex-1 text-center md:text-left">
+    <h3 className="font-playfair font-semibold text-grandeur-brown text-lg">
+      {item.name}
+    </h3>
+    <p className="font-poppins text-gold-accent text-sm">{item.category}</p>
+    <p className="font-playfair font-bold text-gold-accent text-xl">
+      ₦{item.price.toLocaleString()}
+    </p>
+  </div>
+
+  <div className="flex justify-center md:justify-start items-center space-x-2">
+    <button
+      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+      className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
+    >
+      <Minus className="h-4 w-4" />
+    </button>
+
+    <span className="font-poppins font-semibold text-grandeur-brown w-8 text-center">
+      {item.quantity}
+    </span>
+
+    <button
+      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+      className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
+    >
+      <Plus className="h-4 w-4" />
+    </button>
+ 
+
+  <div className="text-center md:text-right mt-4 md:mt-0">
+    <p className="font-playfair font-bold text-grandeur-brown text-lg">
+      ₦{(item.price * item.quantity).toLocaleString()}
+    </p>
+    <button
+      onClick={() => removeItem(item.id)}
+      className="text-red-500 hover:text-red-700 transition-colors duration-200 mt-2"
+    >
+      <Trash2 className="h-4 w-4 mx-auto md:mx-0" />
+    </button>
+  </div>
+</div>
+ </div>
+
                   ))}
                 </div>
               </div>

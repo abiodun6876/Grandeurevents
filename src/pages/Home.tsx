@@ -4,32 +4,60 @@ import { ArrowRight, Star, Heart, Gift, Cake, Utensils, Sparkles, ShoppingBag, C
 import HeroSection from '../components/heroSlides';
 
 const Home = () => {
+  // Image configuration
+  const imageConfig = {
+    cakes: {
+      prefix: 'k',
+      count: 10,
+      defaultIndices: [1, 2, 3] // For slideshow
+    },
+    gifts: {
+      prefix: 'p',
+      count: 10,
+      defaultIndices: [1, 2, 3] // For slideshow
+    },
+    events: {
+      prefix: 'e',
+      count: 10,
+      defaultIndices: [1, 2, 3] // For slideshow
+    },
+    featured: {
+      weddingCake: 'k1',
+      spices: 'p2',
+      eventPackage: 'e3'
+    }
+  };
+
   const services = [
     {
       icon: <Cake className="h-8 w-8" />,
       title: "Custom Cakes",
-      description: "Beautifully crafted cakes for every celebration"
+      description: "Beautifully crafted cakes for every celebration",
+      image: `/assets/image/${imageConfig.cakes.prefix}1.jpeg`
     },
     {
       icon: <Utensils className="h-8 w-8" />,
       title: "Finger Foods",
-      description: "Delicious appetizers and snacks for your events"
+      description: "Delicious appetizers and snacks for your events",
+      image: `/assets/image/${imageConfig.events.prefix}2.jpeg`
     },
     {
       icon: <Sparkles className="h-8 w-8" />,
       title: "Event Decorations",
-      description: "Stunning decorations to make your event memorable"
+      description: "Stunning decorations to make your event memorable",
+      image: `/assets/image/${imageConfig.events.prefix}3.jpeg`
     },
     {
       icon: <Gift className="h-8 w-8" />,
       title: "Custom Packages",
-      description: "Branded event packages and luxury hampers"
+      description: "Branded event packages and luxury hampers",
+      image: `/assets/image/${imageConfig.gifts.prefix}1.jpeg`
     }
   ];
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Sarah",
       text: "Grandeur made our wedding absolutely perfect! The cake was not only beautiful but delicious.",
       rating: 5
     },
@@ -39,75 +67,45 @@ const Home = () => {
       rating: 5
     },
     {
-      name: "Fatima Al-Hassan",
+      name: "Fatima",
       text: "The spices are authentic and high quality. Will definitely order again!",
       rating: 5
     }
   ];
 
-  // Slide show data
-  const cakeSlides = [
-    {
-      id: 1,
-      image: "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg",
-      title: "Wedding Cakes",
-      description: "Elegant designs for your special day"
-    },
-    {
-      id: 2,
-      image: "https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg",
-      title: "Birthday Cakes",
-      description: "Custom creations for all ages"
-    },
-    {
-      id: 3,
-      image: "https://images.pexels.com/photos/132694/pexels-photo-132694.jpeg",
-      title: "Specialty Cakes",
-      description: "Unique flavors and designs"
-    }
-  ];
+  // Generate slideshow data from local images
+  const cakeSlides = imageConfig.cakes.defaultIndices.map((index, i) => ({
+    id: i + 1,
+    image: `/assets/image/${imageConfig.cakes.prefix}${index}.jpeg`,
+    title: ["Wedding Cakes", "Birthday Cakes", "Specialty Cakes"][i],
+    description: [
+      "Elegant designs for your special day",
+      "Custom creations for all ages",
+      "Unique flavors and designs"
+    ][i]
+  }));
 
-  const giftSlides = [
-    {
-      id: 1,
-      image: "https://images.pexels.com/photos/6348086/pexels-photo-6348086.jpeg",
-      title: "Luxury Hampers",
-      description: "Exquisite gift packages for any occasion"
-    },
-    {
-      id: 2,
-      image: "https://images.pexels.com/photos/6348212/pexels-photo-6348212.jpeg",
-      title: "Corporate Gifts",
-      description: "Premium branded gifts for your clients"
-    },
-    {
-      id: 3,
-      image: "https://images.pexels.com/photos/6348230/pexels-photo-6348230.jpeg",
-      title: "Personalized Gifts",
-      description: "Thoughtful presents with a personal touch"
-    }
-  ];
+  const giftSlides = imageConfig.gifts.defaultIndices.map((index, i) => ({
+    id: i + 1,
+    image: `/assets/image/${imageConfig.gifts.prefix}${index}.jpeg`,
+    title: ["Luxury Hampers", "Corporate Gifts", "Personalized Gifts"][i],
+    description: [
+      "Exquisite gift packages for any occasion",
+      "Premium branded gifts for your clients",
+      "Thoughtful presents with a personal touch"
+    ][i]
+  }));
 
-  const eventSlides = [
-    {
-      id: 1,
-      image: "https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg",
-      title: "Wedding Decor",
-      description: "Breathtaking settings for your ceremony"
-    },
-    {
-      id: 2,
-      image: "https://images.pexels.com/photos/169523/pexels-photo-169523.jpeg",
-      title: "Corporate Events",
-      description: "Professional setups for business gatherings"
-    },
-    {
-      id: 3,
-      image: "https://images.pexels.com/photos/274131/pexels-photo-274131.jpeg",
-      title: "Birthday Parties",
-      description: "Fun and festive decorations"
-    }
-  ];
+  const eventSlides = imageConfig.events.defaultIndices.map((index, i) => ({
+    id: i + 1,
+    image: `/assets/image/${imageConfig.events.prefix}${index}.jpeg`,
+    title: ["Wedding Decor", "Corporate Events", "Birthday Parties"][i],
+    description: [
+      "Breathtaking settings for your ceremony",
+      "Professional setups for business gatherings",
+      "Fun and festive decorations"
+    ][i]
+  }));
 
   // Custom Slide Show Component
   type Slide = {
@@ -177,6 +175,10 @@ const Home = () => {
           src={slides[currentIndex].image}
           alt={slides[currentIndex].title}
           className="w-full h-full object-cover transition-transform duration-1000 ease-in-out"
+          onError={(e) => {
+            console.error(`Failed to load image: ${slides[currentIndex].image}`);
+            (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+          }}
         />
         
         {/* Navigation arrows */}
@@ -210,7 +212,6 @@ const Home = () => {
 
   return (
     <div className="animate-fade-in">
-      
       <HeroSection/>
 
       {/* Services Section */}
@@ -259,9 +260,13 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
               <img
-                src="https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg"
+                src={`/assets/image/${imageConfig.featured.weddingCake}.jpeg`}
                 alt="Custom Wedding Cake"
                 className="w-full h-64 object-cover"
+                onError={(e) => {
+                  console.error(`Failed to load wedding cake image`);
+                  (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+                }}
               />
               <div className="p-6">
                 <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-2">
@@ -280,9 +285,13 @@ const Home = () => {
             </div>
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
               <img
-                src="https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg"
+                src={`/assets/image/${imageConfig.featured.spices}.jpeg`}
                 alt="Suya Pepper Spices"
                 className="w-full h-64 object-cover"
+                onError={(e) => {
+                  console.error(`Failed to load spices image`);
+                  (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+                }}
               />
               <div className="p-6">
                 <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-2">
@@ -301,9 +310,13 @@ const Home = () => {
             </div>
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
               <img
-                src="https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg"
+                src={`/assets/image/${imageConfig.featured.eventPackage}.jpeg`}
                 alt="Event Decorations"
                 className="w-full h-64 object-cover"
+                onError={(e) => {
+                  console.error(`Failed to load event package image`);
+                  (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+                }}
               />
               <div className="p-6">
                 <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-2">
@@ -341,7 +354,6 @@ const Home = () => {
               <h3 className="text-2xl font-playfair font-semibold text-grandeur-brown mb-4 text-center">
                 Cake Gallery
               </h3>
-              <SlideShow slides={cakeSlides} interval={4000} />
               <SlideShow slides={cakeSlides} interval={4000} />
             </div>
             <div>

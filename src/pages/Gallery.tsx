@@ -4,62 +4,42 @@ import { X } from 'lucide-react';
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const categories = [
+  // Configuration for gallery categories
+  const galleryConfig = [
     {
-      name: "Wedding Cakes",
-      images: [
-        "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg",
-        "https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg",
-        "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg",
-        "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg"
-      ]
+      name: "Cakes",
+      prefix: "k",
+      count: 7, // Number of cake images (k1.jpeg to k10.jpeg)
+      description: "Our beautiful cake designs for all occasions"
     },
     {
-      name: "Birthday Cakes",
-      images: [
-        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
-        "https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg",
-        "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg",
-        "https://images.pexels.com/photos/140831/pexels-photo-140831.jpeg"
-      ]
+      name: "Events",
+      prefix: "e",
+      count: 10, // Number of event images (e1.jpeg to e10.jpeg)
+      description: "Complete event setups and decorations"
     },
     {
-      name: "Event Decorations",
-      images: [
-        "https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg",
-        "https://images.pexels.com/photos/1729931/pexels-photo-1729931.jpeg",
-        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
-        "https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg"
-      ]
-    },
-    {
-      name: "Finger Foods",
-      images: [
-        "https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg",
-        "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg",
-        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-        "https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg"
-      ]
-    },
-    {
-      name: "Spices & Seasonings",
-      images: [
-        "https://images.pexels.com/photos/1340130/pexels-photo-1340130.jpeg",
-        "https://images.pexels.com/photos/1340116/pexels-photo-1340116.jpeg",
-        "https://images.pexels.com/photos/1340105/pexels-photo-1340105.jpeg",
-        "https://images.pexels.com/photos/1340130/pexels-photo-1340130.jpeg"
-      ]
-    },
-    {
-      name: "Gift Packages",
-      images: [
-        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
-        "https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg",
-        "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg",
-        "https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg"
-      ]
+      name: "Custom Packages",
+      prefix: "p",
+      count: 9, // Number of package images (p1.jpeg to p10.jpeg)
+      description: "Tailored gift packages and premium selections"
     }
   ];
+
+  // Function to generate image paths for a category
+  const generateImages = (prefix: string, count: number) => {
+    return Array.from({ length: count }, (_, i) => ({
+      src: `/assets/image/${prefix}${i+1}.jpeg`,
+      alt: `${prefix.toUpperCase()}${i+1}`
+    }));
+  };
+
+  // Generate gallery categories with images
+  const categories = galleryConfig.map(category => ({
+    name: category.name,
+    images: generateImages(category.prefix, category.count),
+    description: category.description
+  }));
 
   return (
     <div className="animate-fade-in">
@@ -70,7 +50,7 @@ const Gallery = () => {
             Our Gallery
           </h1>
           <p className="text-xl font-poppins text-grandeur-brown/80 max-w-3xl mx-auto">
-            Explore our portfolio of beautiful creations, from elegant wedding cakes to stunning event decorations and delicious finger foods.
+            Explore our portfolio of beautiful cakes, event setups, and custom packages.
           </p>
         </div>
       </section>
@@ -83,17 +63,24 @@ const Gallery = () => {
               <h2 className="text-3xl font-playfair font-bold text-grandeur-brown mb-8 text-center">
                 {category.name}
               </h2>
+              <p className="text-lg text-grandeur-brown/80 text-center mb-8 max-w-2xl mx-auto">
+                {category.description}
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {category.images.map((image, imageIndex) => (
                   <div
                     key={imageIndex}
                     className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
-                    onClick={() => setSelectedImage(image)}
+                    onClick={() => setSelectedImage(image.src)}
                   >
                     <img
-                      src={image}
+                      src={image.src}
                       alt={`${category.name} ${imageIndex + 1}`}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                      onError={(e) => {
+                        console.error(`Failed to load image: ${image.src}`);
+                        (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+                      }}
                     />
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <div className="text-white text-center">
@@ -122,6 +109,10 @@ const Gallery = () => {
               src={selectedImage}
               alt="Gallery image"
               className="max-w-full max-h-full object-contain rounded-lg"
+              onError={(e) => {
+                console.error(`Failed to load image: ${selectedImage}`);
+                (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+              }}
             />
           </div>
         </div>

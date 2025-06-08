@@ -2,6 +2,40 @@ import React from 'react';
 import { Cake, Utensils, Sparkles, Gift, Coffee, Users } from 'lucide-react';
 
 const Services = () => {
+  // Image configuration for each service
+  const serviceImages = {
+    cakes: {
+      prefix: 'k',
+      count: 7,
+      defaultIndex: 1 // Default image index for cakes (k1.jpeg)
+    },
+    catering: {
+      prefix: 'e',
+      count: 10,
+      defaultIndex: 2 // Default image index for catering (e2.jpeg)
+    },
+    decorations: {
+      prefix: 'e',
+      count: 10,
+      defaultIndex: 3 // Default image index for decorations (e3.jpeg)
+    },
+    drinks: {
+      prefix: 'p',
+      count: 10,
+      defaultIndex: 1 // Default image index for drinks (p1.jpeg)
+    },
+    spices: {
+      prefix: 'p',
+      count: 10,
+      defaultIndex: 2 // Default image index for spices (p2.jpeg)
+    },
+    packages: {
+      prefix: 'p',
+      count: 10,
+      defaultIndex: 3 // Default image index for packages (p3.jpeg)
+    }
+  };
+
   const services = [
     {
       icon: <Cake className="h-12 w-12" />,
@@ -13,7 +47,8 @@ const Services = () => {
         "Corporate event desserts",
         "Cupcakes and mini desserts",
         "Sugar art and decorative elements"
-      ]
+      ],
+      image: `/assets/image/${serviceImages.cakes.prefix}${serviceImages.cakes.defaultIndex}.jpeg`
     },
     {
       icon: <Utensils className="h-12 w-12" />,
@@ -25,7 +60,8 @@ const Services = () => {
         "Nigerian small chops",
         "International finger foods",
         "Dietary restriction accommodations"
-      ]
+      ],
+      image: `/assets/image/${serviceImages.catering.prefix}${serviceImages.catering.defaultIndex}.jpeg`
     },
     {
       icon: <Sparkles className="h-12 w-12" />,
@@ -37,7 +73,8 @@ const Services = () => {
         "Corporate event styling",
         "Balloon arrangements",
         "Floral and fabric decorations"
-      ]
+      ],
+      image: `/assets/image/${serviceImages.decorations.prefix}${serviceImages.decorations.defaultIndex}.jpeg`
     },
     {
       icon: <Coffee className="h-12 w-12" />,
@@ -49,7 +86,8 @@ const Services = () => {
         "Wine and champagne selection",
         "Non-alcoholic beverage options",
         "Custom drink menus"
-      ]
+      ],
+      image: `/assets/image/${serviceImages.drinks.prefix}${serviceImages.drinks.defaultIndex}.jpeg`
     },
     {
       icon: <Gift className="h-12 w-12" />,
@@ -61,7 +99,8 @@ const Services = () => {
         "Mixed spice combinations",
         "Custom spice packaging",
         "Bulk orders for restaurants"
-      ]
+      ],
+      image: `/assets/image/${serviceImages.spices.prefix}${serviceImages.spices.defaultIndex}.jpeg`
     },
     {
       icon: <Users className="h-12 w-12" />,
@@ -73,7 +112,8 @@ const Services = () => {
         "Holiday gift sets",
         "Branded rice and garri packs",
         "Custom packaging solutions"
-      ]
+      ],
+      image: `/assets/image/${serviceImages.packages.prefix}${serviceImages.packages.defaultIndex}.jpeg`
     }
   ];
 
@@ -126,23 +166,13 @@ const Services = () => {
                 </div>
                 <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
                   <img
-                    src={`https://images.pexels.com/photos/${
-                      index === 0 ? '1721932' :
-                      index === 1 ? '1395967' :
-                      index === 2 ? '587741' :
-                      index === 3 ? '1283219' :
-                      index === 4 ? '1340130' :
-                      '1729797'
-                    }/pexels-photo-${
-                      index === 0 ? '1721932' :
-                      index === 1 ? '1395967' :
-                      index === 2 ? '587741' :
-                      index === 3 ? '1283219' :
-                      index === 4 ? '1340130' :
-                      '1729797'
-                    }.jpeg`}
+                    src={service.image}
                     alt={service.title}
                     className="rounded-2xl shadow-lg w-full h-96 object-cover"
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${service.image}`);
+                      (e.target as HTMLImageElement).src = '/assets/image/placeholder.jpeg';
+                    }}
                   />
                 </div>
               </div>

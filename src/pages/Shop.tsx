@@ -2,82 +2,77 @@ import React from 'react';
 import ProductCard from '../components/ProductCard';
 
 const Shop = () => {
-  const products = [
+  // Configuration for dynamic product categories
+  const categoryConfig = [
     {
-      id: 'wedding-cake-1',
-      name: 'Elegant Wedding Cake',
-      price: 85000,
-      category: 'Wedding Cakes',
-      image: 'https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg',
-      description: 'Beautiful 3-tier wedding cake with custom decorations'
+      prefix: 'k',
+      count: 7, // Adjust this based on how many cake images you have (k1.jpeg to k10.jpeg)
+      category: 'Cakes',
+      basePrice: 25000,
+      description: 'Delicious custom cake perfect for any occasion'
     },
     {
-      id: 'birthday-cake-1',
-      name: 'Custom Birthday Cake',
-      price: 25000,
-      category: 'Birthday Cakes',
-      image: 'https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg',
-      description: 'Personalized birthday cake with your choice of flavor'
+      prefix: 'e',
+      count: 10, // Adjust this based on how many event images you have (e1.jpeg to e10.jpeg)
+      category: 'Events',
+      basePrice: 50000,
+      description: 'Complete event package with decorations and catering'
     },
     {
-      id: 'cupcakes-1',
-      name: 'Gourmet Cupcakes (12 pcs)',
-      price: 15000,
-      category: 'Cupcakes',
-      image: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg',
-      description: 'Assorted flavors of premium cupcakes'
-    },
-    {
-      id: 'finger-foods-1',
-      name: 'Premium Finger Foods Package',
-      price: 35000,
-      category: 'Catering',
-      image: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg',
-      description: 'Assorted finger foods for 20-30 people'
-    },
-    {
-      id: 'suya-pepper-1',
-      name: 'Authentic Suya Pepper (Yaji)',
-      price: 3500,
-      category: 'Spices',
-      image: 'https://images.pexels.com/photos/1340130/pexels-photo-1340130.jpeg',
-      description: 'Premium quality Suya pepper blend - 250g'
-    },
-    {
-      id: 'pepper-soup-spice-1',
-      name: 'Pepper Soup Spice Mix',
-      price: 2800,
-      category: 'Spices',
-      image: 'https://images.pexels.com/photos/1340116/pexels-photo-1340116.jpeg',
-      description: 'Traditional pepper soup spice blend - 200g'
-    },
-    {
-      id: 'event-decoration-1',
-      name: 'Wedding Decoration Package',
-      price: 150000,
-      category: 'Decorations',
-      image: 'https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg',
-      description: 'Complete wedding decoration setup for 100 guests'
-    },
-    {
-      id: 'gift-hamper-1',
-      name: 'Luxury Gift Hamper',
-      price: 45000,
-      category: 'Gift Packages',
-      image: 'https://images.pexels.com/photos/264985/pexels-photo-264985.jpeg',
-      description: 'Premium gift hamper with assorted treats'
-    },
-    {
-      id: 'corporate-cake-1',
-      name: 'Corporate Event Cake',
-      price: 55000,
-      category: 'Corporate',
-      image: 'https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg',
-      description: 'Professional cake for corporate events and celebrations'
+      prefix: 'p',
+      count: 10, // Adjust this based on how many package images you have (p1.jpeg to p10.jpeg)
+      category: 'Custom Packages',
+      basePrice: 200,
+      description: 'Tailored gift package with premium selections'
     }
   ];
 
-  const categories = ['All', 'Wedding Cakes', 'Birthday Cakes', 'Cupcakes', 'Catering', 'Spices', 'Decorations', 'Gift Packages', 'Corporate'];
+  // Function to generate product entries for a category
+  type CategoryConfig = {
+    prefix: string;
+    count: number;
+    category: string;
+    basePrice: number;
+    description: string;
+  };
+
+  const generateProducts = ({ prefix, count, category, basePrice, description }: CategoryConfig) => {
+    return Array.from({ length: count }, (_, i) => {
+      const productNumber = i + 1;
+      return {
+        id: `${prefix}-${productNumber}`,
+        name: `${category} ${productNumber}`,
+        price: basePrice + (productNumber * 2000), // Price increases by 2000 for each product
+        category: category,
+        image: `/assets/image/${prefix}${productNumber}.jpeg`, // Path to your images
+        description: `${description} - Option ${productNumber}`
+      };
+    });
+  };
+
+  // Generate all dynamic products
+  const dynamicProducts = categoryConfig.flatMap(config => generateProducts(config));
+
+  // Static products (if you have any special products that don't follow the pattern)
+  const staticProducts = [
+    // Example of a special product:
+    {
+      id: 'special-cake-1',
+      name: 'Premium Wedding Cake',
+      price: 120000,
+      category: 'Special Cakes',
+      image: '/assets/image/k2.jpeg',
+      description: 'Exclusive designer wedding cake with custom decorations'
+    }
+    // Add more static products here if needed
+  ];
+
+  // Combine all products
+  const products = [...staticProducts, ...dynamicProducts];
+
+  // Extract unique categories from products
+  const categories = ['All', ...new Set(products.map(product => product.category))];
+
   const [selectedCategory, setSelectedCategory] = React.useState('All');
 
   const filteredProducts = selectedCategory === 'All' 
@@ -93,7 +88,7 @@ const Shop = () => {
             Shop Our Products
           </h1>
           <p className="text-xl font-poppins text-grandeur-brown/80 max-w-3xl mx-auto">
-            Discover our premium collection of cakes, spices, decorations, and gift packages. Add items to your cart and place your order easily.
+            Discover our premium collection of cakes, event packages, and custom gifts.
           </p>
         </div>
       </section>
@@ -122,19 +117,25 @@ const Shop = () => {
       {/* Products Grid */}
       <section className="py-20 bg-cream-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.image}
-                category={product.category}
-                description={product.description}
-              />
-            ))}
-          </div>
+          {filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  category={product.category}
+                  description={product.description}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-xl text-grandeur-brown">No products found in this category.</p>
+            </div>
+          )}
         </div>
       </section>
     </div>
