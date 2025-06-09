@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Heart, Gift, Cake, Utensils, Sparkles, ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react';
 import HeroSection from '../components/heroSlides';
+  import { FaWhatsapp } from 'react-icons/fa';
+
 
 const Home = () => {
   // Image configuration
@@ -115,6 +117,10 @@ const Home = () => {
     description: string;
   };
 
+  // WhatsApp contact info (move to Home scope)
+  const phoneNumber = "+2348033504612";
+  const message = "Hello Grandeur, I'd like to place an order!";
+
   interface SlideShowProps {
     slides: Slide[];
     interval?: number;
@@ -149,6 +155,7 @@ const Home = () => {
 
       return () => clearTimeout(timer);
     }, [currentIndex, isPaused]);
+
 
     return (
       <div 
@@ -213,7 +220,17 @@ const Home = () => {
   return (
     <div className="animate-fade-in">
       <HeroSection/>
-
+ <div className="fixed bottom-6 right-6 z-50">
+      <a
+        href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 transition-colors duration-300 shadow-lg"
+        aria-label="Chat on WhatsApp"
+      >
+        <FaWhatsapp className="text-white text-3xl" />
+      </a>
+    </div>
       {/* Services Section */}
       <section className="py-20 bg-cream-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

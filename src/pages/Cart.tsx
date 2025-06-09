@@ -22,7 +22,7 @@ const Cart = () => {
       `• ${item.name} (₦${item.price.toLocaleString()}) x ${item.quantity} = ₦${(item.price * item.quantity).toLocaleString()}`
     ).join('\n');
 
-    const message = `Hello Grandeur Cakes and Gifts! 🎂
+    const message = `Hello Grandeur Events, Cakes and Gifts! 🎂
 
 I would like to place these orders:
 
@@ -39,7 +39,7 @@ Please confirm availability and provide payment details. Thank you!`;
 
   const handleWhatsAppOrder = () => {
     const message = generateWhatsAppMessage();
-    const whatsappUrl = `https://wa.me/2348151725897?text=${message}`;
+    const whatsappUrl = `https://wa.me/+2348033504612?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
 

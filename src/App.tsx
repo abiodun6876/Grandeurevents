@@ -13,8 +13,10 @@ import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import OrderInstructions from './pages/OrderInstructions';
 
+
 function App() {
   return (
+    
     <CartProvider>
       <Router>
         <div className="min-h-screen bg-cream-white">
