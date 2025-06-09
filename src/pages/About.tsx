@@ -66,7 +66,7 @@ const About = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg"
+                src="\assets\image\k2.jpeg"
                 alt="Our bakery team at work"
                 className="rounded-2xl shadow-lg w-full h-96 object-cover"
               />

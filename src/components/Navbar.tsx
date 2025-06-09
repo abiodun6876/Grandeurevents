@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Cake } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import CartIcon from './CartIcon';
 
 const Navbar = () => {
@@ -25,13 +25,17 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Cake className="h-8 w-8 text-gold-accent" />
+            <img 
+              src="/assets/image/granduer-logo.jpg" 
+              alt="Grandeur Logo"
+              className="h-10 w-10 object-contain" // Adjust size as needed
+            />
             <div>
               <h1 className="text-xl font-playfair font-bold text-grandeur-brown">
                 Grandeur
               </h1>
               <p className="text-xs text-dusty-rose font-poppins -mt-1">
-                Cakes & Gifts
+               Events|Cakes| Gifts And More
               </p>
             </div>
           </Link>

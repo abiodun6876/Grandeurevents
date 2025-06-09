@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import  { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ShoppingBag, X } from 'lucide-react';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -128,18 +129,20 @@ const Gallery = () => {
             Let us create something beautiful and unique for your special event. Every piece is custom-made with love and attention to detail.
           </p>
           <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-            <a
-              href="/order"
-              className="inline-flex items-center bg-white text-grandeur-brown px-8 py-4 rounded-full font-poppins font-semibold hover:bg-cream-white transition-all duration-300 transform hover:scale-105 shadow-lg"
+            <Link
+              to="/shop"
+              className="inline-flex items-center bg-white text-black  px-8 py-4 rounded-full font-poppins font-semibold hover:bg-cream-white transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              Order Custom Work
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-full font-poppins font-semibold hover:bg-white hover:text-grandeur-brown transition-all duration-300 transform hover:scale-105"
+              <ShoppingBag className="mr-2 h-5 w-5  font-poppins  text-black" />
+              Start Shopping
+              <ArrowRight className="ml-2 h-5 w-5  font-poppins   text-black" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center border-2 border-white text-black px-8 py-4 rounded-full font-poppins font-semibold hover:bg-white hover:text-grandeur-brown transition-all duration-300 transform hover:scale-105"
             >
-              Discuss Your Vision
-            </a>
+              Get In Touch
+            </Link>
           </div>
         </div>
       </section>
