@@ -35,7 +35,7 @@ const Navbar = () => {
                 Grandeur
               </h1>
               <p className="text-xs text-dusty-rose font-poppins -mt-1">
-               Events|Cakes| Gifts And
+               Events|Cakes| Gifts And More
               </p>
             </div>
           </Link>
