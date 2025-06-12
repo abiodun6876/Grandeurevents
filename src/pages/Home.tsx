@@ -9,6 +9,7 @@ import ProductCard from '../components/ProductCard';
 import TestimonialCard from '../components/TestimonialCard';
 import { motion } from 'framer-motion';
 
+
 const Home = () => {
   // Enhanced image configuration
   const imageConfig = {
@@ -131,11 +132,9 @@ const Home = () => {
   const eventSlides = generateSlides('events');
 
   // WhatsApp contact info
-  const phoneNumber = "+2348033504612";
-  const message = "Hello Grandeur, I'd like to discuss a luxury order!";
 
   // Mobile menu state
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [, setMobileMenuOpen] = useState(false);
 
   // Parallax scroll effect setup
 
@@ -155,31 +154,6 @@ const Home = () => {
     };
   }, []);
 
-  const cursorVariants = {
-    default: {
-      x: cursorPosition.x - 16,
-      y: cursorPosition.y - 16,
-      backgroundColor: "rgba(184, 147, 89, 0.2)",
-      width: 32,
-      height: 32,
-      transition: { type: "spring", mass: 0.1 }
-    },
-    hover: {
-      x: cursorPosition.x - 25,
-      y: cursorPosition.y - 25,
-      backgroundColor: "rgba(184, 147, 89, 0.5)",
-      width: 50,
-      height: 50,
-      mixBlendMode: "multiply"
-    },
-    click: {
-      x: cursorPosition.x - 20,
-      y: cursorPosition.y - 20,
-      backgroundColor: "rgba(184, 147, 89, 0.8)",
-      width: 40,
-      height: 40
-    }
-  };
 
   // Featured products with enhanced details
   const featuredProducts = [
