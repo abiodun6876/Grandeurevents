@@ -21,6 +21,12 @@ const Shop = () => {
       count: 10,
       category: 'Custom Packages',
       description: 'Tailored gift package with premium selections'
+    },
+    {
+      prefix: 'b',
+      count: 2,
+      category: 'Bread',
+      description: 'Freshly baked bread varieties'
     }
   ];
 

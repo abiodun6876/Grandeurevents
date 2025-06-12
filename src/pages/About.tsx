@@ -72,8 +72,8 @@ const About = () => {
               />
               <div className="absolute -bottom-6 -right-6 bg-gold-accent text-white p-6 rounded-2xl shadow-lg">
                 <div className="text-center">
-                  <div className="text-2xl font-playfair font-bold">Est.</div>
-                  <div className="text-3xl font-playfair font-bold">2019</div>
+                  
+                  <div className="text-3xl font-playfair font-bold">2025</div>
                 </div>
               </div>
             </div>
