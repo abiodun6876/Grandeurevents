@@ -1,5 +1,5 @@
 {
-  "name": "grandeur-cakes-website",
+  "name": "grandeur-events-cake-gifts",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  
   "dependencies": {
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",

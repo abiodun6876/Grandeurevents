@@ -6,23 +6,20 @@ const Shop = () => {
   const categoryConfig = [
     {
       prefix: 'k',
-      count: 7, // Adjust this based on how many cake images you have (k1.jpeg to k10.jpeg)
+      count: 7,
       category: 'Cakes',
-      basePrice: 25000,
       description: 'Delicious custom cake perfect for any occasion'
     },
     {
       prefix: 'e',
-      count: 10, // Adjust this based on how many event images you have (e1.jpeg to e10.jpeg)
+      count: 10,
       category: 'Events',
-      basePrice: 50000,
       description: 'Complete event package with decorations and catering'
     },
     {
       prefix: 'p',
-      count: 10, // Adjust this based on how many package images you have (p1.jpeg to p10.jpeg)
+      count: 10,
       category: 'Custom Packages',
-      basePrice: 200,
       description: 'Tailored gift package with premium selections'
     }
   ];
@@ -32,19 +29,17 @@ const Shop = () => {
     prefix: string;
     count: number;
     category: string;
-    basePrice: number;
     description: string;
   };
 
-  const generateProducts = ({ prefix, count, category, basePrice, description }: CategoryConfig) => {
+  const generateProducts = ({ prefix, count, category, description }: CategoryConfig) => {
     return Array.from({ length: count }, (_, i) => {
       const productNumber = i + 1;
       return {
         id: `${prefix}-${productNumber}`,
         name: `${category} ${productNumber}`,
-        price: basePrice + (productNumber * 2000), // Price increases by 2000 for each product
         category: category,
-        image: `/assets/image/${prefix}${productNumber}.jpeg`, // Path to your images
+        image: `/assets/image/${prefix}${productNumber}.jpeg`,
         description: `${description} - Option ${productNumber}`
       };
     });
@@ -53,18 +48,15 @@ const Shop = () => {
   // Generate all dynamic products
   const dynamicProducts = categoryConfig.flatMap(config => generateProducts(config));
 
-  // Static products (if you have any special products that don't follow the pattern)
+  // Static products
   const staticProducts = [
-    // Example of a special product:
     {
       id: 'special-cake-1',
       name: 'Premium Wedding Cake',
-      price: 120000,
       category: 'Special Cakes',
       image: '/assets/image/k2.jpeg',
       description: 'Exclusive designer wedding cake with custom decorations'
     }
-    // Add more static products here if needed
   ];
 
   // Combine all products
@@ -88,7 +80,7 @@ const Shop = () => {
             Shop Our Products
           </h1>
           <p className="text-xl font-poppins text-grandeur-brown/80 max-w-3xl mx-auto">
-            Discover our premium collection of cakes, event packages, and custom gifts.
+            Discover our premium collection. Contact us via WhatsApp for pricing and customization options.
           </p>
         </div>
       </section>
@@ -124,7 +116,6 @@ const Shop = () => {
                   key={product.id}
                   id={product.id}
                   name={product.name}
-                  price={product.price}
                   image={product.image}
                   category={product.category}
                   description={product.description}

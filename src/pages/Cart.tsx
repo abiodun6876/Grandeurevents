@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -14,12 +13,9 @@ const Cart = () => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
 
-  const deliveryFee = 3000;
-  const grandTotal = state.total + deliveryFee;
-
   const generateWhatsAppMessage = () => {
     const orderDetails = state.items.map(item => 
-      `• ${item.name} (₦${item.price.toLocaleString()}) x ${item.quantity} = ₦${(item.price * item.quantity).toLocaleString()}`
+      `• ${item.name} x ${item.quantity}`
     ).join('\n');
 
     const message = `Hello Grandeur Events, Cakes and Gifts! 🎂
@@ -28,11 +24,7 @@ I would like to place these orders:
 
 ${orderDetails}
 
-Subtotal: ₦${state.total.toLocaleString()}
-Delivery Fee: ₦${deliveryFee.toLocaleString()}
-*Total Amount: ₦${grandTotal.toLocaleString()}*
-
-Please confirm availability and provide payment details. Thank you!`;
+Please confirm availability. Thank you!`;
 
     return encodeURIComponent(message);
   };
@@ -98,59 +90,48 @@ Please confirm availability and provide payment details. Thank you!`;
                 <div className="space-y-6">
                   {state.items.map((item) => (
                     <div
-  key={item.id}
-  className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 p-4 border border-blush-pink/20 rounded-xl"
->
-  <img
-    src={item.image}
-    alt={item.name}
-    className="w-20 h-20 object-cover rounded-lg self-center"
-  />
+                      key={item.id}
+                      className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 p-4 border border-blush-pink/20 rounded-xl"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-20 h-20 object-cover rounded-lg self-center"
+                      />
 
-  <div className="flex-1 text-center md:text-left">
-    <h3 className="font-playfair font-semibold text-grandeur-brown text-lg">
-      {item.name}
-    </h3>
-    <p className="font-poppins text-gold-accent text-sm">{item.category}</p>
-    <p className="font-playfair font-bold text-gold-accent text-xl">
-      ₦{item.price.toLocaleString()}
-    </p>
-  </div>
+                      <div className="flex-1 text-center md:text-left">
+                        <h3 className="font-playfair font-semibold text-grandeur-brown text-lg">
+                          {item.name}
+                        </h3>
+                      </div>
 
-  <div className="flex justify-center md:justify-start items-center space-x-2">
-    <button
-      onClick={() => updateQuantity(item.id, item.quantity - 1)}
-      className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
-    >
-      <Minus className="h-4 w-4" />
-    </button>
+                      <div className="flex justify-center md:justify-start items-center space-x-2">
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
+                        >
+                          <Minus className="h-4 w-4" />
+                        </button>
 
-    <span className="font-poppins font-semibold text-grandeur-brown w-8 text-center">
-      {item.quantity}
-    </span>
+                        <span className="font-poppins font-semibold text-grandeur-brown w-8 text-center">
+                          {item.quantity}
+                        </span>
 
-    <button
-      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-      className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
-    >
-      <Plus className="h-4 w-4" />
-    </button>
- 
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="w-8 h-8 bg-gold-accent/20 text-gold-accent rounded-full flex items-center justify-center hover:bg-gold-accent hover:text-white transition-all duration-200"
+                        >
+                          <Plus className="h-4 w-4" />
+                        </button>
 
-  <div className="text-center md:text-right mt-4 md:mt-0">
-    <p className="font-playfair font-bold text-grandeur-brown text-lg">
-      ₦{(item.price * item.quantity).toLocaleString()}
-    </p>
-    <button
-      onClick={() => removeItem(item.id)}
-      className="text-red-500 hover:text-red-700 transition-colors duration-200 mt-2"
-    >
-      <Trash2 className="h-4 w-4 mx-auto md:mx-0" />
-    </button>
-  </div>
-</div>
- </div>
-
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -165,20 +146,7 @@ Please confirm availability and provide payment details. Thank you!`;
                 
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between font-poppins">
-                    <span className="text-grandeur-brown/70">Subtotal ({state.itemCount} items)</span>
-                    <span className="font-semibold text-grandeur-brown">₦{state.total.toLocaleString()}</span>
-                  </div>
-                  
-                  <div className="flex justify-between font-poppins">
-                    <span className="text-grandeur-brown/70">Delivery Fee</span>
-                    <span className="font-semibold text-grandeur-brown">₦{deliveryFee.toLocaleString()}</span>
-                  </div>
-                  
-                  <div className="border-t border-blush-pink/20 pt-4">
-                    <div className="flex justify-between font-playfair text-xl font-bold">
-                      <span className="text-grandeur-brown">Total</span>
-                      <span className="text-gold-accent">₦{grandTotal.toLocaleString()}</span>
-                    </div>
+                    <span className="text-grandeur-brown/70">Items ({state.itemCount})</span>
                   </div>
                 </div>
 
@@ -201,7 +169,7 @@ Please confirm availability and provide payment details. Thank you!`;
 
                 <div className="mt-6 p-4 bg-gold-accent/10 rounded-lg">
                   <p className="font-poppins text-sm text-grandeur-brown/70 text-center">
-                    <strong>Note:</strong> Clicking "Order via WhatsApp" will open WhatsApp with your order details. Our team will confirm availability and provide payment instructions.
+                    <strong>Note:</strong> Clicking "Order via WhatsApp" will open WhatsApp with your order details. Our team will confirm availability.
                   </p>
                 </div>
               </div>

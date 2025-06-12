@@ -1,23 +1,28 @@
 import React from 'react';
-import { Plus, ShoppingCart } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface ProductCardProps {
   id: string;
   name: string;
-  price: number;
   image: string;
   category: string;
   description?: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, category, description }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, category, description }) => {
   const { dispatch } = useCart();
 
   const handleAddToCart = () => {
     dispatch({
       type: 'ADD_ITEM',
-      payload: { id, name, price, image, category, description }
+      payload: { 
+        id, 
+        name, 
+        image, 
+        category, 
+        description 
+      }
     });
   };
 
@@ -49,18 +54,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, categ
           </p>
         )}
         
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-playfair font-bold text-gold-accent">
-            ₦{price.toLocaleString()}
-          </div>
-          
-          <button
-            onClick={handleAddToCart}
-            className="bg-gold-accent text-white p-3 rounded-full hover:bg-grandeur-brown transition-all duration-300 transform hover:scale-105 shadow-lg group"
-          >
-            <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
-          </button>
-        </div>
+        <button
+          onClick={handleAddToCart}
+          className="bg-gold-accent text-white p-3 rounded-full hover:bg-grandeur-brown transition-all duration-300 transform hover:scale-105 shadow-lg group"
+        >
+          <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+        </button>
       </div>
     </div>
   );
