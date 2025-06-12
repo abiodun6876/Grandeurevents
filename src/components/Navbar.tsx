@@ -209,7 +209,7 @@ const Navbar = () => {
         whileTap={{ scale: 0.9 }}
       >
         <a
-          href="https://wa.me/2348151725897"
+          href="https://wa.me/+2348033504612"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-300 shadow-xl"
