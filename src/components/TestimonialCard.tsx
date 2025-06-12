@@ -14,7 +14,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   title, 
   text, 
   rating, 
-  imageUrl 
+ 
 }) => {
   return (
     <div className="bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10 hover:border-gold-accent/30 transition-all duration-300">
@@ -28,13 +28,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       </div>
       <p className="font-poppins text-white/80 mb-6 italic">"{text}"</p>
       <div className="flex items-center">
-        <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-gold-accent">
-          <img 
-            src={imageUrl} 
-            alt={name} 
-            className="w-full h-full object-cover"
-          />
-        </div>
+        
         <div>
           <h4 className="font-poppins font-semibold text-white">
             {name}

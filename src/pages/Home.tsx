@@ -137,7 +137,6 @@ const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Parallax scroll effect setup
-  const parallaxRef = useRef<HTMLDivElement>(null);
 
   // Custom cursor effect
   const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
