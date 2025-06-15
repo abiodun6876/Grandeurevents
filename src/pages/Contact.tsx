@@ -90,7 +90,7 @@ const Contact = () => {
                     <h3 className="font-poppins font-semibold text-grandeur-brown mb-2">Our Location</h3>
                     <p className="font-poppins text-grandeur-brown/70">
                       K.M 46 Lagos-Ibadan Expressway<br />
-                      Jerusalem Redemption Camp<br />
+                    Redemption Camp<br />
                       Mowe, Ogun State<br />
                       Lagos, Nigeria
                     </p>

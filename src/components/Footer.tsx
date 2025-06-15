@@ -102,7 +102,7 @@ const Footer = () => {
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-gold-accent mt-0.5" />
                 <span>K.M 46 Lagos-Ibadan Expressway
-Jerusalem Redemption Camp
+                  Redemption Camp
 Mowe, Ogun State
 Lagos, Nigeria</span>
               </div>
