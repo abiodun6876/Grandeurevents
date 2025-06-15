@@ -97,10 +97,7 @@ const Footer = () => {
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-gold-accent mt-0.5" />
-                <span>No 3 Association Avenue, Harmony Villa, OPIC Estate
-Sheri
-Lagos
-Lagos state</span>
+                <span>No 9, CAC Avenue, Irepo Estate, Bakare bus stop, Igando Road, Ikotun, Lagos.</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-gold-accent mt-0.5" />

@@ -94,6 +94,18 @@ const Contact = () => {
                       Mowe, Ogun State<br />
                       Lagos, Nigeria
                     </p>
+<br></br>
+<div className="w-12 h-12 bg-gold-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="h-6 w-6 text-gold-accent" />
+                  </div>
+                    <p className="font-poppins text-grandeur-brown/70">
+                     No 9, CAC Avenue, Irepo Estate,<br />
+                     Bakare bus stop,<br />
+                      Igando Road, Ikotun,<br />
+                      Lagos, Nigeria
+                    </p>
+
+                      
                   </div>
                 </div>
 
