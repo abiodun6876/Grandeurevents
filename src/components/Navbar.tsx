@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import WhatsAppFloat from './WhatsAppFloat'; // Adjust the import path as necessary
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -202,24 +203,16 @@ const Navbar = () => {
         </AnimatePresence>
       </nav>
 
-      {/* Floating WhatsApp Button */}
-      <motion.div 
-        className="fixed bottom-6 right-6 z-50"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <a
-          href="https://wa.me/+2348033504612"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-300 shadow-xl"
-          aria-label="Chat on WhatsApp"
-          onMouseEnter={() => setCursorVariant("hover")}
-          onMouseLeave={() => setCursorVariant("default")}
-        >
-          <FaWhatsapp className="text-white text-3xl" />
-        </a>
-      </motion.div>
+    <motion.div 
+  className="fixed bottom-6 right-6 z-50"
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  onMouseEnter={() => setCursorVariant("hover")}
+  onMouseLeave={() => setCursorVariant("default")}
+>
+  <WhatsAppFloat />
+</motion.div>
+
     </>
   );
 };

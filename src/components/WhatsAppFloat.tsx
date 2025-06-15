@@ -18,7 +18,7 @@ const WhatsAppFloat = () => {
     );
   }, []);
 
-  const startWhatsAppChat = (selectedOption = null) => {
+  const startWhatsAppChat = (selectedOption: string | null = null) => {
     const dateTime = new Date().toLocaleString();
     let message = `${greeting} Welcome to Grandeur Events!\n\n`;
     
