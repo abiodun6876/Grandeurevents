@@ -1,5 +1,5 @@
-import React from 'react';
-import { Plus } from 'lucide-react';
+import React, { useState } from 'react';
+import { Plus, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface ProductCardProps {
@@ -11,23 +11,59 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, category, description }) => {
-  const { dispatch } = useCart();
+  const { state, dispatch } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleAddToCart = () => {
-    dispatch({
-      type: 'ADD_ITEM',
-      payload: { 
-        id, 
-        name, 
-        image, 
-        category, 
-        description 
-      }
-    });
+    // Debugging logs
+    console.log('Attempting to add to cart:', { id, name });
+    console.log('Current cart state before add:', state);
+
+    try {
+      dispatch({
+        type: 'ADD_ITEM',
+        payload: { 
+          id, 
+          name, 
+          image, 
+          category, 
+          description 
+        }
+      });
+
+      // Visual feedback
+      setIsAnimating(true);
+      setIsAdded(true);
+      
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 1000);
+
+      setTimeout(() => {
+        setIsAdded(false);
+      }, 2000);
+
+      console.log('Item should be added to cart. New state:', state);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
 
+  // Check if this item is already in cart
+  const existingItem = state.items.find(item => item.id === id);
+  const buttonText = isAdded ? 'Added!' : (existingItem ? `Add More (${existingItem.quantity})` : 'Add to Cart');
+
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group">
+    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group relative">
+      {/* Visual indicator when item is added */}
+      {isAnimating && (
+        <div className="absolute inset-0 bg-green-500/10 z-10 flex items-center justify-center">
+          <div className="animate-ping absolute h-16 w-16 rounded-full bg-green-500/30"></div>
+          <Check className="h-8 w-8 text-white bg-green-500 rounded-full p-1 z-20" />
+        </div>
+      )}
+
       <div className="relative overflow-hidden">
         <img
           src={image}
@@ -56,10 +92,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, category, de
         
         <button
           onClick={handleAddToCart}
-          className="bg-gold-accent text-white p-3 rounded-full hover:bg-grandeur-brown transition-all duration-300 transform hover:scale-105 shadow-lg group"
+          disabled={isAnimating}
+          className={`w-full flex items-center justify-center gap-2 p-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg ${
+            isAdded 
+              ? 'bg-green-500 text-white hover:bg-green-600' 
+              : 'bg-gold-accent text-white hover:bg-grandeur-brown'
+          } ${isAnimating ? 'animate-pulse' : ''}`}
         >
-          <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+          {isAdded ? (
+            <Check className="h-5 w-5" />
+          ) : (
+            <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+          )}
+          <span className="font-poppins font-medium text-sm">
+            {buttonText}
+          </span>
         </button>
+
+        {/* Debug info (remove in production) */}
+        <div className="mt-2 text-xs text-gray-400 hidden">
+          Item ID: {id} | In cart: {existingItem ? `Yes (${existingItem.quantity})` : 'No'}
+        </div>
       </div>
     </div>
   );

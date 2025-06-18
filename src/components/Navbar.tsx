@@ -3,13 +3,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
-import WhatsAppFloat from './WhatsAppFloat'; // Adjust the import path as necessary
+import WhatsAppFloat from './WhatsAppFloat';
+import { useCart } from '../context/CartContext'; // Add this import
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const [cursorVariant, setCursorVariant] = useState("default");
   const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
+  const { state } = useCart(); // Add this line to get cart state
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -98,7 +100,7 @@ const Navbar = () => {
               >
                 <ShoppingBag className="h-6 w-6 text-grandeur-brown" />
                 <span className="absolute -top-2 -right-2 bg-gold-accent text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                  0
+                  {state?.itemCount || 0}
                 </span>
               </Link>
               <Link
@@ -153,6 +155,13 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 ))}
+                <Link 
+                  to="/cart"
+                  className="relative text-2xl font-playfair text-grandeur-brown hover:text-gold-accent"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Cart ({state?.itemCount || 0})
+                </Link>
               </motion.div>
 
               <motion.div 
@@ -203,16 +212,15 @@ const Navbar = () => {
         </AnimatePresence>
       </nav>
 
-    <motion.div 
-  className="fixed bottom-6 right-6 z-50"
-  whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.9 }}
-  onMouseEnter={() => setCursorVariant("hover")}
-  onMouseLeave={() => setCursorVariant("default")}
->
-  <WhatsAppFloat />
-</motion.div>
-
+      <motion.div 
+        className="fixed bottom-6 right-6 z-50"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onMouseEnter={() => setCursorVariant("hover")}
+        onMouseLeave={() => setCursorVariant("default")}
+      >
+        <WhatsAppFloat />
+      </motion.div>
     </>
   );
 };
