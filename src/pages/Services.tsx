@@ -182,64 +182,80 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-cream-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-playfair font-bold text-grandeur-brown mb-4">
-              Our Process
-            </h2>
-            <p className="text-lg font-poppins text-grandeur-brown/70">
-              How we bring your vision to life
+<section className="py-24 bg-cream-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-20">
+      <span className="inline-block text-gold-accent font-poppins font-medium uppercase tracking-wider mb-3">
+        Our Workflow
+      </span>
+      <h2 className="text-4xl md:text-5xl font-playfair font-bold text-grandeur-brown mb-4">
+        Crafting Your Vision
+      </h2>
+      <p className="max-w-2xl mx-auto text-lg font-poppins text-grandeur-brown/70 leading-relaxed">
+        A seamless journey from concept to reality, with precision at every step
+      </p>
+    </div>
+    
+    <div className="relative">
+      {/* Decorative line connecting steps */}
+      <div className="hidden md:block absolute top-8 left-1/4 right-1/4 h-1 bg-gold-accent/20"></div>
+      <div className="hidden md:block absolute top-8 left-3/4 right-1/4 h-1 bg-gold-accent/20"></div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6">
+        {[
+          {
+            number: 1,
+            title: "Consultation",
+            description: "We discuss your vision, requirements, and preferences in detail.",
+            icon: "💬"
+          },
+          {
+            number: 2,
+            title: "Planning",
+            description: "We create a detailed plan and timeline for your project.",
+            icon: "📝"
+          },
+          {
+            number: 3,
+            title: "Creation",
+            description: "Our skilled team brings your vision to life with attention to detail.",
+            icon: "✂️"
+          },
+          {
+            number: 4,
+            title: "Delivery",
+            description: "We deliver and set up everything perfectly for your event.",
+            icon: "🎁"
+          }
+        ].map((step) => (
+          <div 
+            key={step.number} 
+            className="group relative text-center px-6 py-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-2"
+          >
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+              <div className="w-14 h-14 bg-gradient-to-br from-gold-accent to-gold-accent-dark text-white rounded-full flex items-center justify-center mx-auto text-xl font-bold shadow-md group-hover:scale-110 transition-transform duration-300">
+                <span className="text-sm mr-1">{step.icon}</span>
+                {step.number}
+              </div>
+            </div>
+            <h3 className="text-2xl font-playfair font-semibold text-grandeur-brown mt-8 mb-4">
+              {step.title}
+            </h3>
+            <p className="font-poppins text-grandeur-brown/70 leading-relaxed">
+              {step.description}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gold-accent text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">
-                1
-              </div>
-              <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-4">
-                Consultation
-              </h3>
-              <p className="font-poppins text-grandeur-brown/70">
-                We discuss your vision, requirements, and preferences in detail.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gold-accent text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">
-                2
-              </div>
-              <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-4">
-                Planning
-              </h3>
-              <p className="font-poppins text-grandeur-brown/70">
-                We create a detailed plan and timeline for your project.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gold-accent text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">
-                3
-              </div>
-              <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-4">
-                Creation
-              </h3>
-              <p className="font-poppins text-grandeur-brown/70">
-                Our skilled team brings your vision to life with attention to detail.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gold-accent text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">
-                4
-              </div>
-              <h3 className="text-xl font-playfair font-semibold text-grandeur-brown mb-4">
-                Delivery
-              </h3>
-              <p className="font-poppins text-grandeur-brown/70">
-                We deliver and set up everything perfectly for your event.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+    
+    <div className="text-center mt-16">
+      <button className="px-8 py-3 bg-gold-accent hover:bg-gold-accent-dark text-white font-poppins font-medium rounded-full transition-colors duration-300 shadow-md hover:shadow-lg">
+        Start Your Project
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-gold-accent to-grandeur-brown text-white">
