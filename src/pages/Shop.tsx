@@ -4,31 +4,37 @@ import ProductCard from '../components/ProductCard';
 const Shop = () => {
   // Configuration for dynamic product categories
   const categoryConfig = [
-    {
-      prefix: 'k',
-      count: 7,
-      category: 'Cakes',
-      description: 'Delicious custom cake perfect for any occasion'
-    },
-    {
-      prefix: 'e',
-      count: 10,
-      category: 'Events',
-      description: 'Complete event package with decorations and catering'
-    },
-    {
-      prefix: 'p',
-      count: 10,
-      category: 'Custom Packages',
-      description: 'Tailored gift package with premium selections'
-    },
-    {
-      prefix: 'b',
-      count: 2,
-      category: 'Bread',
-      description: 'Freshly baked bread varieties'
-    }
-  ];
+  {
+    prefix: 'k',
+    count: 7,
+    category: 'Cakes',
+    description: 'Delicious custom cake perfect for any occasion'
+  },
+  {
+    prefix: 'e',
+    count: 10,
+    category: 'Events',
+    description: 'Complete event package with decorations and catering'
+  },
+  {
+    prefix: 'p',
+    count: 10,
+    category: 'Custom Packages',
+    description: 'Tailored gift package with premium selections'
+  },
+  {
+    prefix: 'b',
+    count: 2,
+    category: 'Bread',
+    description: 'Freshly baked bread varieties'
+  },
+  {
+    prefix: 'g',
+    count: 9,
+    category: 'Gifts and Souvenirs',
+    description: 'Creative and memorable gifts for your loved ones'
+  }
+];
 
   // Function to generate product entries for a category
   type CategoryConfig = {
